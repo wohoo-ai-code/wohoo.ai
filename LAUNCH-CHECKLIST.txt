@@ -1,0 +1,272 @@
+╔════════════════════════════════════════════════════════════════╗
+║                   WOHOO.AI LAUNCH CHECKLIST                    ║
+║                    Print this and check off!                   ║
+╚════════════════════════════════════════════════════════════════╝
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 1: API KEYS & ACCOUNTS (10 minutes)                     │
+└────────────────────────────────────────────────────────────────┘
+
+Supabase Setup:
+  [ ] Create account at https://supabase.com
+  [ ] Create new project
+  [ ] Copy Project URL → ___________________________________
+  [ ] Copy Anon Key → _______________________________________
+  [ ] Copy Service Role Key (keep secret!) → _______________
+  [ ] Go to SQL Editor
+  [ ] Copy & paste setup-database.sql
+  [ ] Run the SQL script
+  [ ] Verify 'waitlist' table exists
+
+Resend Setup:
+  [ ] Create account at https://resend.com
+  [ ] Go to API Keys
+  [ ] Create new API key
+  [ ] Copy API Key → ________________________________________
+  [ ] Use sender: onboarding@resend.dev (for testing)
+       OR
+  [ ] Add custom domain: wohoo.ai
+  [ ] Add DNS records (SPF, DKIM)
+  [ ] Wait for verification
+  [ ] Use sender: hello@wohoo.ai
+
+Google Analytics (Optional):
+  [ ] Create account at https://analytics.google.com
+  [ ] Create new property: wohoo.ai
+  [ ] Copy Measurement ID → _________________________________
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 2: CONFIGURATION (5 minutes)                            │
+└────────────────────────────────────────────────────────────────┘
+
+Frontend Configuration:
+  [ ] Open index.html
+  [ ] Find lines 506-507
+  [ ] Replace SUPABASE_URL with your URL
+  [ ] Replace SUPABASE_ANON_KEY with your key
+  [ ] Save file
+
+Google Analytics (if using):
+  [ ] Open index.html
+  [ ] Add GA script in <head> section (after line 12)
+  [ ] Replace G-XXXXXXXXXX with your Measurement ID (2 places)
+  [ ] Save file
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 3: BACKEND DEPLOYMENT (5 minutes)                       │
+└────────────────────────────────────────────────────────────────┘
+
+Supabase CLI Setup:
+  [ ] Run: npm install -g supabase
+  [ ] Run: supabase login
+  [ ] Get project ref from dashboard URL
+  [ ] Run: supabase link --project-ref YOUR_REF
+
+Edge Function Deployment (Option A - Easy):
+  [ ] Run: ./deploy.sh
+  [ ] Enter Resend API key when prompted
+  [ ] Enter FROM_EMAIL when prompted
+  [ ] Verify deployment success
+
+Edge Function Deployment (Option B - Manual):
+  [ ] Run: supabase secrets set RESEND_API_KEY=re_xxxxx
+  [ ] Run: supabase secrets set FROM_EMAIL=hello@wohoo.ai
+  [ ] Run: supabase functions deploy send-welcome-email
+  [ ] Verify deployment success
+
+Create Database Webhook:
+  [ ] Go to Supabase Dashboard
+  [ ] Navigate to Database → Webhooks
+  [ ] Click "Create a new hook"
+  [ ] Name: send-welcome-email-trigger
+  [ ] Table: waitlist
+  [ ] Event: Insert (check this only)
+  [ ] Type: Supabase Edge Function
+  [ ] Function: send-welcome-email
+  [ ] Click "Create webhook"
+  [ ] Verify status is "Active"
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 4: FRONTEND DEPLOYMENT (5 minutes)                      │
+└────────────────────────────────────────────────────────────────┘
+
+Choose ONE deployment option:
+
+Option A - Netlify (Recommended):
+  [ ] Run: npm install -g netlify-cli
+  [ ] Run: netlify login
+  [ ] Run: netlify deploy --prod
+  [ ] Copy deployment URL: ________________________________
+
+Option B - Vercel:
+  [ ] Run: npm install -g vercel
+  [ ] Run: vercel --prod
+  [ ] Copy deployment URL: ________________________________
+
+Option C - GitHub Pages:
+  [ ] Create GitHub repository
+  [ ] Run: git init
+  [ ] Run: git add .
+  [ ] Run: git commit -m "Launch wohoo.ai"
+  [ ] Run: git remote add origin https://github.com/USER/wohooai.git
+  [ ] Run: git push -u origin main
+  [ ] Go to Settings → Pages
+  [ ] Enable Pages (source: main branch)
+  [ ] Copy deployment URL: ________________________________
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 5: TESTING (5 minutes)                                  │
+└────────────────────────────────────────────────────────────────┘
+
+Local/Pre-Deploy Testing:
+  [ ] Open index.html in browser
+  [ ] Check browser console (F12) - no errors?
+  [ ] Fill out form with test data
+  [ ] Submit form
+  [ ] See success message?
+
+Production Testing:
+  [ ] Open deployed site URL
+  [ ] Test on desktop browser
+  [ ] Fill out form with YOUR real email
+  [ ] Submit form
+  [ ] Success message appears?
+  [ ] Form clears?
+
+Database Verification:
+  [ ] Go to Supabase → Database → waitlist table
+  [ ] See new row with your test data?
+  [ ] email_sent = true?
+
+Email Verification:
+  [ ] Check email inbox
+  [ ] Check spam/junk folder
+  [ ] Welcome email received?
+  [ ] Email displays correctly?
+  [ ] Blue theme/branding correct?
+
+Mobile Testing:
+  [ ] Open site on phone
+  [ ] UI looks good?
+  [ ] Form works on mobile?
+  [ ] All text readable?
+  [ ] Submit test on mobile
+
+Edge Function Logs:
+  [ ] Run: supabase functions logs send-welcome-email
+  [ ] See "Email sent successfully" message?
+  [ ] No errors in logs?
+
+Analytics Testing (if enabled):
+  [ ] Open Google Analytics → Realtime
+  [ ] Visit site in another tab
+  [ ] See 1 active user?
+  [ ] Submit form
+  [ ] See signup event?
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 6: DOMAIN SETUP (Optional, 15 minutes)                  │
+└────────────────────────────────────────────────────────────────┘
+
+Custom Domain Configuration:
+  [ ] Go to hosting provider dashboard
+  [ ] Add custom domain: wohoo.ai
+  [ ] Note the DNS instructions
+  [ ] Go to domain registrar
+  [ ] Add CNAME/A records as instructed
+  [ ] Wait for DNS propagation (15 min - 24 hours)
+  [ ] Test https://wohoo.ai loads
+  [ ] SSL certificate issued? (green lock)
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 7: PRE-LAUNCH FINAL CHECKS                              │
+└────────────────────────────────────────────────────────────────┘
+
+Security:
+  [ ] Service role key NOT in index.html?
+  [ ] Only anon key in frontend?
+  [ ] HTTPS enabled (green lock)?
+  [ ] No .env files committed to git?
+
+Functionality:
+  [ ] Homepage loads: https://wohoo.ai
+  [ ] Privacy page works: https://wohoo.ai/privacy.html
+  [ ] Terms page works: https://wohoo.ai/terms.html
+  [ ] Form submission works
+  [ ] Welcome emails send
+  [ ] No console errors (F12)
+  [ ] Mobile responsive
+
+Content:
+  [ ] All text reads correctly
+  [ ] No typos in copy
+  [ ] Social media links correct
+  [ ] Email hello@wohoo.ai mentioned
+  [ ] All links work
+
+Performance:
+  [ ] Page loads in < 3 seconds
+  [ ] Images load quickly
+  [ ] Animations smooth
+  [ ] No lag on mobile
+
+┌────────────────────────────────────────────────────────────────┐
+│ PHASE 8: LAUNCH! 🚀                                           │
+└────────────────────────────────────────────────────────────────┘
+
+Social Media Announcement:
+  [ ] Post on X (Twitter) with link
+  [ ] Post on Instagram (link in bio)
+  [ ] Post on LinkedIn
+  [ ] Email close friends/network
+  [ ] Update email signature
+
+Monitoring (First 24 Hours):
+  [ ] Check analytics every 2 hours
+  [ ] Monitor Supabase function logs
+  [ ] Check Resend email logs
+  [ ] Watch for error reports
+  [ ] Respond to comments/questions
+
+┌────────────────────────────────────────────────────────────────┐
+│ POST-LAUNCH (Ongoing)                                         │
+└────────────────────────────────────────────────────────────────┘
+
+Daily (First Week):
+  [ ] Check signup count: SELECT COUNT(*) FROM waitlist;
+  [ ] Review email delivery rate
+  [ ] Check error logs
+  [ ] Respond to emails
+
+Weekly:
+  [ ] Export waitlist data
+  [ ] Review analytics (traffic, sources, conversion)
+  [ ] Check uptime (set up UptimeRobot)
+  [ ] Plan improvements
+
+Monthly:
+  [ ] Review costs (should be $0 or minimal)
+  [ ] Check service usage vs limits
+  [ ] Update content if needed
+  [ ] A/B test improvements
+
+┌────────────────────────────────────────────────────────────────┐
+│ RESOURCES                                                      │
+└────────────────────────────────────────────────────────────────┘
+
+Quick Setup:  See QUICK-START.md
+Detailed:     See PRODUCTION-READY-CHECKLIST.md
+Overview:     See SUMMARY.md
+Navigation:   See START-HERE.md
+Environment:  See .env.example
+Deployment:   Run ./deploy.sh
+
+Dashboard Links:
+  Supabase:   https://supabase.com/dashboard
+  Resend:     https://resend.com/emails
+  Analytics:  https://analytics.google.com
+
+╔════════════════════════════════════════════════════════════════╗
+║  All checked? CONGRATULATIONS! You're live! 🎉                 ║
+║  Share wohoo.ai and watch the signups roll in!                ║
+╚════════════════════════════════════════════════════════════════╝

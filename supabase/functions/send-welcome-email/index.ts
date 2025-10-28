@@ -20,95 +20,111 @@ function getWelcomeEmailHtml(name: string): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to wohoo.ai</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+<body style="margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #e3f2fd 0%, #f5f9ff 50%, #ffffff 100%);">
     <table role="presentation" style="width: 100%; border-collapse: collapse;">
         <tr>
             <td align="center" style="padding: 40px 20px;">
-                <table role="presentation" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                    <!-- Header -->
+                <table role="presentation" style="max-width: 600px; width: 100%; background-color: rgba(255, 255, 255, 0.95); border-radius: 16px; box-shadow: 0 4px 20px rgba(66, 153, 225, 0.15); border: 1.5px solid rgba(66, 153, 225, 0.1);">
+                    <!-- Header with Brand -->
                     <tr>
-                        <td style="padding: 40px 40px 30px; text-align: center; border-bottom: 1px solid #e5e5e5;">
-                            <h1 style="margin: 0; font-size: 28px; font-weight: 600; color: #0a0a0a;">
-                                ✈️ wohoo.ai
-                            </h1>
+                        <td style="padding: 40px 40px 30px; text-align: center;">
+                            <table role="presentation" style="margin: 0 auto;">
+                                <tr>
+                                    <td>
+                                        <div style="display: inline-flex; align-items: center; gap: 8px;">
+                                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); border-radius: 10px; color: white; font-size: 20px; font-weight: 600; display: flex; align-items: center; justify-content: center; float: left;">W</div>
+                                            <h1 style="margin: 0; font-size: 32px; font-weight: 600; background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.02em; float: left; padding-top: 8px;">wohoo.ai</h1>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
 
                     <!-- Content -->
                     <tr>
-                        <td style="padding: 40px;">
-                            <h2 style="margin: 0 0 20px; font-size: 24px; font-weight: 600; color: #0a0a0a;">
-                                Welcome to the Waitlist, ${name}! 🎉
+                        <td style="padding: 20px 40px 40px;">
+                            <h2 style="margin: 0 0 8px; font-size: 36px; font-weight: 300; color: #1565c0; letter-spacing: -0.03em; line-height: 1.2;">
+                                Boarding pass
                             </h2>
+                            <h3 style="margin: 0 0 24px; font-size: 36px; font-weight: 400; color: #1976d2; font-style: italic; font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.02em; line-height: 1.2;">
+                                Delivered.
+                            </h3>
 
-                            <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #404040;">
-                                Thank you for joining the wohoo.ai waitlist! You're now part of an exclusive group who will get early access to automatic flight check-ins.
+                            <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.85);">
+                                Hey ${name}! Welcome to the wohoo.ai waitlist.
                             </p>
 
-                            <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #404040;">
-                                <strong>What is wohoo.ai?</strong><br>
-                                We automatically check you in for your flights 24 hours before departure, ensuring you get the best boarding positions without setting alarms or remembering check-in times.
+                            <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.75);">
+                                You're now part of an exclusive group who will get early access to automatic flight check-ins.
+                            </p>
+
+                            <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.75);">
+                                Our team is working on some awesome AI agents that can automatically check you in for your flight—no apps, no stress at all! Your flight reservations are super helpful because they let us test our agents across different airlines and formats. Real data is what makes our agent smarter and better for you!
                             </p>
 
                             <!-- Benefits Box -->
-                            <table role="presentation" style="width: 100%; background-color: #f8f9fa; border-radius: 8px; margin: 30px 0;">
+                            <table role="presentation" style="width: 100%; background: rgba(66, 153, 225, 0.08); border: 1.5px solid rgba(66, 153, 225, 0.15); border-radius: 12px; margin: 30px 0;">
                                 <tr>
-                                    <td style="padding: 24px;">
-                                        <h3 style="margin: 0 0 16px; font-size: 18px; font-weight: 600; color: #0a0a0a;">
+                                    <td style="padding: 28px;">
+                                        <h4 style="margin: 0 0 16px; font-size: 18px; font-weight: 500; color: #1565c0; letter-spacing: -0.01em;">
                                             What's Next?
-                                        </h3>
-                                        <ul style="margin: 0; padding: 0 0 0 20px; color: #404040;">
-                                            <li style="margin-bottom: 10px;">We'll notify you when we're ready to launch</li>
-                                            <li style="margin-bottom: 10px;">Early access to test the service before public release</li>
-                                            <li style="margin-bottom: 10px;">Special founding member pricing (exclusive to waitlist)</li>
-                                            <li>Priority support and feature requests</li>
+                                        </h4>
+                                        <ul style="margin: 0; padding: 0 0 0 20px; color: rgba(25, 118, 210, 0.75); line-height: 1.8;">
+                                            <li style="margin-bottom: 10px;">To get started forward flight reservations to <a href="mailto:hello@wohoo.ai" style="color: #1565c0; text-decoration: none; font-weight: 500;">hello@wohoo.ai</a> along with your seat preferences</li>
+                                            <li style="margin-bottom: 10px;">Receive boarding passes 24 hours before your flight</li>
+                                            <li>Plus, we're here to help with priority support and any feature requests you might have!</li>
                                         </ul>
                                     </td>
                                 </tr>
                             </table>
 
-                            <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #404040;">
-                                In the meantime, feel free to spread the word! Know someone who travels frequently? Share wohoo.ai with them.
+                            <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.75);">
+                                We look forward to helping you take one thing off your plate for your next travel.
+                            </p>
+
+                            <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.75);">
+                                Know someone who travels frequently? Share wohoo.ai with them!
                             </p>
 
                             <!-- CTA Button -->
                             <table role="presentation" style="margin: 30px 0;">
                                 <tr>
                                     <td style="text-align: center;">
-                                        <a href="https://wohoo.ai" style="display: inline-block; padding: 14px 32px; background-color: #0099ff; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+                                        <a href="https://wohoo.ai" style="display: inline-block; padding: 16px 36px; background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); color: #ffffff; text-decoration: none; border-radius: 10px; font-weight: 500; font-size: 16px; letter-spacing: -0.01em; box-shadow: 0 4px 12px rgba(25, 118, 210, 0.25);">
                                             Visit Our Website
                                         </a>
                                     </td>
                                 </tr>
                             </table>
 
-                            <p style="margin: 30px 0 0; font-size: 16px; line-height: 1.6; color: #404040;">
-                                Thanks again for your interest!<br>
-                                <strong>The wohoo.ai Team</strong>
+                            <p style="margin: 30px 0 0; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.75);">
+                                Thanks for joining!<br>
+                                <strong style="color: #1565c0;">The wohoo.ai Team</strong>
                             </p>
                         </td>
                     </tr>
 
                     <!-- Footer -->
                     <tr>
-                        <td style="padding: 30px 40px; background-color: #f8f9fa; border-top: 1px solid #e5e5e5; border-radius: 0 0 12px 12px;">
+                        <td style="padding: 30px 40px; background: rgba(66, 153, 225, 0.04); border-top: 1.5px solid rgba(66, 153, 225, 0.1); border-radius: 0 0 16px 16px;">
                             <!-- Social Links -->
-                            <table role="presentation" style="width: 100%; margin-bottom: 20px;">
+                            <table role="presentation" style="width: 100%; margin-bottom: 16px;">
                                 <tr>
                                     <td style="text-align: center;">
-                                        <a href="https://twitter.com/wohooai" style="display: inline-block; margin: 0 10px; color: #0099ff; text-decoration: none; font-size: 14px;">X (Twitter)</a>
-                                        <a href="https://instagram.com/wohooai" style="display: inline-block; margin: 0 10px; color: #0099ff; text-decoration: none; font-size: 14px;">Instagram</a>
+                                        <a href="https://twitter.com/wohooai" style="display: inline-block; margin: 0 12px; color: rgba(25, 118, 210, 0.6); text-decoration: none; font-size: 14px; transition: color 0.2s;">X (Twitter)</a>
+                                        <a href="https://instagram.com/wohooai" style="display: inline-block; margin: 0 12px; color: rgba(25, 118, 210, 0.6); text-decoration: none; font-size: 14px; transition: color 0.2s;">Instagram</a>
                                     </td>
                                 </tr>
                             </table>
 
-                            <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #737373; text-align: center;">
-                                wohoo.ai - Never miss your flight check-in<br>
-                                <a href="https://wohoo.ai/privacy.html" style="color: #0099ff; text-decoration: none;">Privacy Policy</a> |
-                                <a href="https://wohoo.ai/terms.html" style="color: #0099ff; text-decoration: none;">Terms of Service</a>
+                            <p style="margin: 0 0 12px; font-size: 12px; line-height: 1.5; color: rgba(25, 118, 210, 0.5); text-align: center;">
+                                <strong style="color: rgba(25, 118, 210, 0.6);">© 2025 wohoo.ai</strong><br>
+                                <a href="https://wohoo.ai/privacy.html" style="color: rgba(25, 118, 210, 0.6); text-decoration: none;">Privacy Policy</a> |
+                                <a href="https://wohoo.ai/terms.html" style="color: rgba(25, 118, 210, 0.6); text-decoration: none;">Terms of Service</a>
                             </p>
 
-                            <p style="margin: 15px 0 0; font-size: 12px; line-height: 1.5; color: #a3a3a3; text-align: center;">
+                            <p style="margin: 0; font-size: 11px; line-height: 1.5; color: rgba(25, 118, 210, 0.4); text-align: center;">
                                 You received this email because you joined the wohoo.ai waitlist.<br>
                                 If you didn't sign up, you can safely ignore this email.
                             </p>
@@ -126,26 +142,31 @@ function getWelcomeEmailHtml(name: string): string {
 // Plain text version (fallback)
 function getWelcomeEmailText(name: string): string {
   return `
-Welcome to the Waitlist, ${name}!
+wohoo.ai - Boarding pass. Delivered.
 
-Thank you for joining the wohoo.ai waitlist! You're now part of an exclusive group who will get early access to automatic flight check-ins.
+Hey ${name}! Welcome to the wohoo.ai waitlist.
 
-What is wohoo.ai?
-We automatically check you in for your flights 24 hours before departure, ensuring you get the best boarding positions without setting alarms or remembering check-in times.
+You're now part of an exclusive group who will get early access to automatic flight check-ins.
+
+Our team is working on some awesome AI agents that can automatically check you in for your flight—no apps, no stress at all! Your flight reservations are super helpful because they let us test our agents across different airlines and formats. Real data is what makes our agent smarter and better for you!
 
 What's Next?
-- We'll notify you when we're ready to launch
-- Early access to test the service before public release
-- Special founding member pricing (exclusive to waitlist)
-- Priority support and feature requests
+- To get started forward flight reservations to hello@wohoo.ai along with your seat preferences
+- Receive boarding passes 24 hours before your flight
+- Plus, we're here to help with priority support and any feature requests you might have!
 
-In the meantime, feel free to spread the word! Know someone who travels frequently? Share wohoo.ai with them.
+We look forward to helping you take one thing off your plate for your next travel.
 
-Thanks again for your interest!
+Know someone who travels frequently? Share wohoo.ai with them!
+
+Thanks for joining!
 The wohoo.ai Team
 
 ---
-wohoo.ai - Never miss your flight check-in
+© 2025 wohoo.ai
+X (Twitter): https://twitter.com/wohooai
+Instagram: https://instagram.com/wohooai
+
 Privacy Policy: https://wohoo.ai/privacy.html
 Terms of Service: https://wohoo.ai/terms.html
 
