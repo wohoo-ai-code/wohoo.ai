@@ -95,11 +95,20 @@ Then: Supabase Dashboard → Database → Webhooks → Create webhook
 
 ### Step 4: Deploy Frontend (3 min)
 
+**Option A - Vercel (Recommended):**
+```bash
+npm install -g vercel
+vercel --prod
+```
+
+**Option B - Netlify:**
 ```bash
 npm install -g netlify-cli
 netlify login
 netlify deploy --prod
 ```
+
+See [VERCEL-DEPLOYMENT.md](VERCEL-DEPLOYMENT.md) for detailed Vercel guide.
 
 ### Step 5: Test (2 min)
 
@@ -122,6 +131,9 @@ Here's what each file does:
 | **[SUMMARY.md](SUMMARY.md)** | High-level overview, current status | 5 min |
 | **[QUICK-START.md](QUICK-START.md)** | Fast 15-min setup guide | 5 min |
 | **[PRODUCTION-READY-CHECKLIST.md](PRODUCTION-READY-CHECKLIST.md)** | Complete production guide | 20 min |
+| **[VERCEL-DEPLOYMENT.md](VERCEL-DEPLOYMENT.md)** | Deploy to Vercel guide | 10 min |
+| **[DEPLOY-GUIDE.md](DEPLOY-GUIDE.md)** | deploy.sh usage guide | 8 min |
+| **[ANALYTICS-TRACKING.md](ANALYTICS-TRACKING.md)** | Google Analytics setup | 12 min |
 | **[README.md](README.md)** | Original comprehensive docs | 15 min |
 | **[SETUP-CHECKLIST.md](SETUP-CHECKLIST.md)** | Original setup checklist | 10 min |
 | **[.env.example](.env.example)** | Environment variables reference | 3 min |

@@ -11,6 +11,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLTTRE4DVG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JLTTRE4DVG', {
+            'send_page_view': true,
+            'debug_mode': true  // Enable debug mode for testing
+        });
+
+        // Log to console for debugging
+        console.log('GA initialized with ID: G-JLTTRE4DVG');
+        console.log('Debug mode enabled');
+    </script>
+
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -429,12 +445,13 @@
             <p class="tagline fade-in delay-3">Set it. Forget it. Fly 🚀</p>
 
             <div class="form-wrapper fade-in delay-4">
-                <form id="waitlistForm">
+                <form id="waitlistForm" autocomplete="on">
                     <input
                         type="text"
                         id="name"
                         name="name"
                         placeholder="Your Name"
+                        autocomplete="name"
                         required
                         style="width: 100%; margin-bottom: 0.75rem;"
                     >
@@ -444,6 +461,7 @@
                         id="email"
                         name="email"
                         placeholder="Your Email Address"
+                        autocomplete="email"
                         required
                         style="width: 100%; margin-bottom: 0.75rem;"
                     >
@@ -452,7 +470,8 @@
                         type="tel"
                         id="phone"
                         name="phone"
-                        placeholder="Your Phone Number (Optional)"
+                        placeholder="Your Phone Number"
+                        autocomplete="tel"
                         style="width: 100%; margin-bottom: 0.75rem;"
                     >
 
@@ -503,9 +522,31 @@
 
     <script>
         // Supabase Configuration
-        const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        const SUPABASE_URL = 'https://xuvjwzbsmxrsganltqgs.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1dmp3emJzbXhyc2dhbmx0cWdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4Nzk0ODAsImV4cCI6MjA3NjQ1NTQ4MH0.ePh_ngLG4_Ul91LHRqK5804pJN8QhKzRNfZcqRaOeWw';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Google Analytics Helper Function
+        function trackEvent(eventName, eventParams = {}) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventParams);
+                console.log('📊 GA Event:', eventName, eventParams);
+            } else {
+                console.warn('⚠️ gtag not loaded yet for event:', eventName);
+            }
+        }
+
+        // Wait for gtag to be ready before initializing tracking
+        function initializeAnalytics() {
+            if (typeof gtag === 'undefined') {
+                console.log('⏳ Waiting for gtag to load...');
+                setTimeout(initializeAnalytics, 100);
+                return;
+            }
+
+            console.log('✅ gtag loaded, initializing analytics...');
+            setupEventTracking();
+        }
 
         // Generate subtle minimal stars
         const starsContainer = document.getElementById('starsContainer');
@@ -565,15 +606,68 @@
         const errorMessage = document.getElementById('errorMessage');
         const errorText = document.getElementById('errorText');
 
+        // Track form field interactions
+        document.getElementById('name').addEventListener('focus', () => {
+            trackEvent('form_field_focus', {
+                event_category: 'engagement',
+                event_label: 'name_field',
+                field_name: 'name'
+            });
+        });
+
+        document.getElementById('email').addEventListener('focus', () => {
+            trackEvent('form_field_focus', {
+                event_category: 'engagement',
+                event_label: 'email_field',
+                field_name: 'email'
+            });
+        });
+
+        document.getElementById('phone').addEventListener('focus', () => {
+            trackEvent('form_field_focus', {
+                event_category: 'engagement',
+                event_label: 'phone_field',
+                field_name: 'phone'
+            });
+        });
+
+        // Track when user starts typing (form engagement)
+        let formStartTracked = false;
+        ['name', 'email', 'phone'].forEach(fieldId => {
+            document.getElementById(fieldId).addEventListener('input', () => {
+                if (!formStartTracked) {
+                    trackEvent('form_start', {
+                        event_category: 'engagement',
+                        event_label: 'user_started_typing'
+                    });
+                    formStartTracked = true;
+                }
+            });
+        });
+
         function showError(message) {
             errorText.textContent = message;
             errorMessage.classList.remove('hidden');
             successMessage.classList.add('hidden');
+
+            // Track error
+            trackEvent('form_error', {
+                event_category: 'form',
+                event_label: 'submission_error',
+                error_message: message
+            });
         }
 
         function showSuccess() {
             successMessage.classList.remove('hidden');
             errorMessage.classList.add('hidden');
+
+            // Track success
+            trackEvent('signup_success', {
+                event_category: 'conversion',
+                event_label: 'waitlist_join',
+                value: 1
+            });
         }
 
         form.addEventListener('submit', async (e) => {
@@ -601,6 +695,13 @@
                 return;
             }
 
+            // Track form submission attempt
+            trackEvent('form_submit_attempt', {
+                event_category: 'form',
+                event_label: 'waitlist_form',
+                has_phone: phone ? 'yes' : 'no'
+            });
+
             submitBtn.disabled = true;
             submitBtn.textContent = 'Joining...';
             errorMessage.classList.add('hidden');
@@ -618,8 +719,7 @@
                             user_agent: navigator.userAgent,
                             timestamp: new Date().toISOString()
                         }
-                    }])
-                    .select();
+                    }]);
 
                 if (error) {
                     if (error.code === '23505') {
@@ -640,7 +740,91 @@
             }
         });
 
-        // Initialize
+        // Setup all event tracking
+        function setupEventTracking() {
+            // Track link clicks
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    const linkText = link.textContent.trim() || link.getAttribute('aria-label') || 'unknown';
+
+                    trackEvent('link_click', {
+                        event_category: 'navigation',
+                        event_label: linkText,
+                        link_url: href,
+                        link_type: href.startsWith('http') ? 'external' : 'internal'
+                    });
+                });
+            });
+
+            // Track page load
+            trackEvent('page_view', {
+                event_category: 'engagement',
+                event_label: 'landing_page',
+                page_title: document.title,
+                page_location: window.location.href
+            });
+
+            // Track time on page (send after 10 seconds of engagement)
+            setTimeout(() => {
+                trackEvent('engaged_user', {
+                    event_category: 'engagement',
+                    event_label: '10_seconds_on_page',
+                    value: 10
+                });
+            }, 10000);
+
+            // Track scroll depth
+            let scrollDepth25Tracked = false;
+            let scrollDepth50Tracked = false;
+            let scrollDepth75Tracked = false;
+            let scrollDepth100Tracked = false;
+
+            window.addEventListener('scroll', () => {
+                const scrollPercent = (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100;
+
+                if (scrollPercent >= 25 && !scrollDepth25Tracked) {
+                    trackEvent('scroll_depth', {
+                        event_category: 'engagement',
+                        event_label: '25_percent',
+                        value: 25
+                    });
+                    scrollDepth25Tracked = true;
+                }
+
+                if (scrollPercent >= 50 && !scrollDepth50Tracked) {
+                    trackEvent('scroll_depth', {
+                        event_category: 'engagement',
+                        event_label: '50_percent',
+                        value: 50
+                    });
+                    scrollDepth50Tracked = true;
+                }
+
+                if (scrollPercent >= 75 && !scrollDepth75Tracked) {
+                    trackEvent('scroll_depth', {
+                        event_category: 'engagement',
+                        event_label: '75_percent',
+                        value: 75
+                    });
+                    scrollDepth75Tracked = true;
+                }
+
+                if (scrollPercent >= 100 && !scrollDepth100Tracked) {
+                    trackEvent('scroll_depth', {
+                        event_category: 'engagement',
+                        event_label: '100_percent',
+                        value: 100
+                    });
+                    scrollDepth100Tracked = true;
+                }
+            });
+        }
+
+        // Initialize analytics when gtag is ready
+        initializeAnalytics();
+
+        // Initialize page
         generateStars();
     </script>
 </body>

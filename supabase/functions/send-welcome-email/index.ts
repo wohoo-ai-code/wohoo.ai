@@ -56,11 +56,7 @@ function getWelcomeEmailHtml(name: string): string {
                             </p>
 
                             <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.75);">
-                                You're now part of an exclusive group who will get early access to automatic flight check-ins.
-                            </p>
-
-                            <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: rgba(25, 118, 210, 0.75);">
-                                Our team is working on some awesome AI agents that can automatically check you in for your flight—no apps, no stress at all! Your flight reservations are super helpful because they let us test our agents across different airlines and formats. Real data is what makes our agent smarter and better for you!
+                                Our team is working on some awesome AI agents that can automatically check you in for your flight—no apps, no stress at all!
                             </p>
 
                             <!-- Benefits Box -->
@@ -146,9 +142,7 @@ wohoo.ai - Boarding pass. Delivered.
 
 Hey ${name}! Welcome to the wohoo.ai waitlist.
 
-You're now part of an exclusive group who will get early access to automatic flight check-ins.
-
-Our team is working on some awesome AI agents that can automatically check you in for your flight—no apps, no stress at all! Your flight reservations are super helpful because they let us test our agents across different airlines and formats. Real data is what makes our agent smarter and better for you!
+Our team is working on some awesome AI agents that can automatically check you in for your flight—no apps, no stress at all!
 
 What's Next?
 - To get started forward flight reservations to hello@wohoo.ai along with your seat preferences

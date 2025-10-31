@@ -1,0 +1,33 @@
+# Supabase - Backend code (deployed separately)
+supabase/
+
+# Documentation - No need to deploy
+PRODUCTION-READY-CHECKLIST.md
+QUICK-START.md
+SUMMARY.md
+START-HERE.md
+DEPLOY-GUIDE.md
+ANALYTICS-TRACKING.md
+VERCEL-DEPLOYMENT.md
+
+# Database setup
+setup-database.sql
+
+# Deployment scripts
+deploy.sh
+
+# Git
+.git/
+.gitignore
+
+# Environment files
+.env*
+!.env.example
+
+# Temporary files
+.temp/
+.DS_Store
+*.log
+
+# Email template reference (embedded in Edge Function)
+email-template.html
