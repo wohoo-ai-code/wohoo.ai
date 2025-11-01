@@ -63,34 +63,6 @@
                 transparent 60%);
         }
 
-        /* Subtle Blue Dots/Stars */
-        .stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(66, 153, 225, 0.3);
-            border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .star.bright {
-            width: 3px;
-            height: 3px;
-            background: rgba(66, 153, 225, 0.5);
-            box-shadow: 0 0 4px rgba(66, 153, 225, 0.3);
-        }
-
         /* Content container */
         .content {
             position: relative;
@@ -601,7 +573,6 @@
     <div class="background-grid"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-    <div class="stars-container" id="starsContainer"></div>
 
     <!-- Main content -->
     <div class="content">
